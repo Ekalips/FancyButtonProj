@@ -5,16 +5,16 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -124,14 +124,53 @@ public class FancyButton extends RelativeLayout implements View.OnClickListener{
     }
 
 
+    public static Path composeRoundedRectPath(float left, float top, float right, float bottom, float diameter){
+        Path path = new Path();
+        path.moveTo(left + diameter/2 ,top);
+        path.lineTo(right - diameter/2,top);
+        path.quadTo(right, top, right, top + diameter/2);
+        path.lineTo(right ,bottom - diameter/2);
+        path.quadTo(right ,bottom, right - diameter/2, bottom);
+        path.lineTo(left + diameter/2,bottom);
+        path.quadTo(left,bottom,left, bottom - diameter/2);
+        path.lineTo(left,top + diameter/2);
+        path.quadTo(left,top, left + diameter/2, top);
+        path.close();
+        return path;
+    }
 
+    public static Path composeRoundedRectPath(RectF rectF, float diameter){
+        return FancyButton.composeRoundedRectPath(rectF,diameter,diameter,diameter,diameter);
+    }
+
+    public static Path composeRoundedRectPath(RectF rect, float topLeftDiameter, float topRightDiameter, float bottomRightDiameter, float bottomLeftDiameter){
+        Path path = new Path();
+        topLeftDiameter = topLeftDiameter < 0 ? 0 : topLeftDiameter;
+        topRightDiameter = topRightDiameter < 0 ? 0 : topRightDiameter;
+        bottomLeftDiameter = bottomLeftDiameter < 0 ? 0 : bottomLeftDiameter;
+        bottomRightDiameter = bottomRightDiameter < 0 ? 0 : bottomRightDiameter;
+
+        path.moveTo(rect.left + topLeftDiameter/2 ,rect.top);
+        path.lineTo(rect.right - topRightDiameter/2,rect.top);
+        path.quadTo(rect.right, rect.top, rect.right, rect.top + topRightDiameter/2);
+        path.lineTo(rect.right ,rect.bottom - bottomRightDiameter/2);
+        path.quadTo(rect.right ,rect.bottom, rect.right - bottomRightDiameter/2, rect.bottom);
+        path.lineTo(rect.left + bottomLeftDiameter/2,rect.bottom);
+        path.quadTo(rect.left,rect.bottom,rect.left, rect.bottom - bottomLeftDiameter/2);
+        path.lineTo(rect.left,rect.top + topLeftDiameter/2);
+        path.quadTo(rect.left,rect.top, rect.left + topLeftDiameter/2, rect.top);
+        path.close();
+
+        return path;
+    }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         if (state == State.normal) {
-            canvas.drawRoundRect(this.getLeft() + 16, this.getTop() + 16, canvas.getWidth() - 16, canvas.getHeight() - 16, 10, 10, paint);
+//            Path path = FancyButton.composeRoundedRectPath(new RectF(this.getLeft() + 16, this.getTop() + 16, canvas.getWidth() - 16, canvas.getHeight() - 16),16);
+            canvas.drawPath(FancyButton.composeRoundedRectPath(this.getLeft() + 16, this.getTop() + 16, canvas.getWidth() - 16, canvas.getHeight() - 16,16), paint);
             destLeft = (this.getRight()-this.getLeft())/2 - 60;
             destRight = (this.getRight()-this.getLeft())/2 + 60;
             destTop = (this.getBottom()-this.getTop())/2 - 60;
@@ -149,9 +188,9 @@ public class FancyButton extends RelativeLayout implements View.OnClickListener{
         }
         else {
             if (state == State.srink)
-                canvas.drawRoundRect((float) (this.getLeft() + nowPadW), (float) (this.getTop() + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad, (float) nowRad, paint);
+                canvas.drawPath(FancyButton.composeRoundedRectPath((float)(this.getLeft() + nowPadW), (float) (this.getTop() + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), paint);
             if (state == State.back) {
-                canvas.drawRoundRect((float) (this.getLeft() + nowPadW), (float) (this.getTop() + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad, (float) nowRad, paint);
+                canvas.drawPath(FancyButton.composeRoundedRectPath((float) (this.getLeft() + nowPadW), (float) (this.getTop() + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), paint);
                 if (bar.getVisibility() != INVISIBLE)
                     bar.setVisibility(INVISIBLE);
             }
