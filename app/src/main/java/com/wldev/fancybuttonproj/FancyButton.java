@@ -10,14 +10,16 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.renderscript.Sampler;
 import android.support.annotation.RequiresApi;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,6 +52,15 @@ public class FancyButton extends RelativeLayout implements View.OnClickListener{
     Paint paint;
     ProgressBar bar;
     TextView view;
+
+    AnimatorListenerAdapter hideProgressBarListener = new AnimatorListenerAdapter() {
+        @Override
+        public void onAnimationEnd(Animator animation) {
+            super.onAnimationEnd(animation);
+            bar.setVisibility(INVISIBLE);
+        }
+    };
+
     public void init(Context context,AttributeSet attrs){
 
         this.setClickable(true);
@@ -57,18 +68,21 @@ public class FancyButton extends RelativeLayout implements View.OnClickListener{
         this.setWillNotDraw(false);
         int[] attrsArray = new int[] {
                 android.R.attr.text, // 0
-                android.R.attr.layout_width, // 1
-                android.R.attr.layout_height // 2
+                android.R.attr.color,
+                android.R.attr.color
         };
 
         TypedArray ta = context.obtainStyledAttributes(attrs, attrsArray);
         String text = ta.getString(0);
-        Log.d(TAG, "init: " + text);
+        int color = ta.getColor(1,Color.BLACK);
+        int textColor = ta.getColor(2, Color.BLACK);
+        Log.d(TAG, "init: " + color);
         ta.recycle();
 
         view = new TextView(context, attrs, android.R.attr.borderlessButtonStyle);
         view.setOnClickListener(this);
         view.setClickable(true);
+        view.setTextColor(textColor);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         view.setLayoutParams(params);
         view.setText(text);
@@ -79,13 +93,24 @@ public class FancyButton extends RelativeLayout implements View.OnClickListener{
         barParams.addRule(CENTER_IN_PARENT,TRUE);
         bar.setLayoutParams(barParams);
         bar.setIndeterminate(true);
-        bar.setIndeterminateTintList(ColorStateList.valueOf(Color.BLACK));
+//        bar.setIndeterminateTintList(ColorStateList.valueOf(Color.BLACK));
+
+        // fixes pre-Lollipop progressBar indeterminateDrawable tinting
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+
+            Drawable wrapDrawable = DrawableCompat.wrap(bar.getIndeterminateDrawable());
+            DrawableCompat.setTint(wrapDrawable, color);
+            bar.setIndeterminateDrawable(DrawableCompat.unwrap(wrapDrawable));
+        } else {
+            bar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+        }
+
 //        bar.setProgressTintList(ColorStateList.valueOf(Color.BLACK));
         bar.setVisibility(INVISIBLE);
         this.addView(bar);
 
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setColor(Color.BLACK);
+        paint.setColor(color);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeWidth(4);
 
@@ -113,13 +138,7 @@ public class FancyButton extends RelativeLayout implements View.OnClickListener{
             destBot = (this.getBottom()-this.getTop())/2 + 60;
             circleR = Math.abs(destLeft-destRight)/2;
             ObjectAnimator animator = ObjectAnimator.ofFloat(bar,"alpha",1,0);
-            animator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    bar.setVisibility(INVISIBLE);
-                }
-            });
+            animator.addListener(hideProgressBarListener);
             animator.start();
         }
         else if (state == State.shrinked){
