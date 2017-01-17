@@ -1,6 +1,9 @@
 # FancyButtonProj
 Juste a funcy button with progress bar
 
+<img alt="Showcase" src="http://i65.tinypic.com/1671mbk.gif" />
+
+
 You can set attributes to this view to change color of ProgressBar, TextView and Button border. 
 
     <com.wldev.fancybuttonproj.FancyButton
