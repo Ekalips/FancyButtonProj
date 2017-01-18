@@ -111,7 +111,7 @@ public class FancyButton extends RelativeLayout {
         view.setClickable(false);
         view.setFocusable(false);
         view.setTextColor(textColor);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
         view.setText(text);
         this.addView(view);
