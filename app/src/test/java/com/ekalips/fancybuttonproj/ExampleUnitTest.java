@@ -1,4 +1,4 @@
-package com.wldev.fancybuttonproj;
+package com.ekalips.fancybuttonproj;
 
 import org.junit.Test;
 
