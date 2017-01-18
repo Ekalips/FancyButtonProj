@@ -100,7 +100,7 @@ public class FancyButton extends RelativeLayout {
         int progressColor = ta.getColor(R.styleable.FancyButton_progressColor, Color.BLACK);
         int strokeWidth = ta.getInt(R.styleable.FancyButton_strokeWidth, 4);
         boolean capsText = ta.getBoolean(R.styleable.FancyButton_capsText,true);
-        if (capsText)
+        if (capsText && text!=null)
             text = text.toUpperCase();
         String temp = ta.getString(R.styleable.FancyButton_btnStyle);
         if (temp!=null)
