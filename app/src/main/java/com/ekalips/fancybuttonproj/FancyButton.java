@@ -13,7 +13,6 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -141,7 +140,6 @@ public class FancyButton extends RelativeLayout {
         fillPaint.setColor(fillColor);
         fillPaint.setStyle(Paint.Style.FILL);
 
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         initPadd = Utils.dp2px(context.getResources(),5);
         trueSixtee = Utils.dp2px(context.getResources(),20);
 
@@ -172,7 +170,7 @@ public class FancyButton extends RelativeLayout {
             animator.setDuration(0);
             animator.start();
         }
-        else if (state == State.shrinked){
+        else if (state == State.shrieked){
             if (!hideAfterCollapse){
                 if (style == 1 || style == 2)
                     canvas.drawCircle(destRight-((destRight-destLeft)/2), destBot-((destBot-destTop)/2), circleR/2, fillPaint);
@@ -184,7 +182,7 @@ public class FancyButton extends RelativeLayout {
             bar.setVisibility(VISIBLE);
         }
         else {
-            if (state == State.srink)
+            if (state == State.shrink)
                 if (style == 0)
                     canvas.drawPath(Utils.composeRoundedRectPath((float)(0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), strokePaint);
                 else if (style == 1)
@@ -218,7 +216,7 @@ public class FancyButton extends RelativeLayout {
 
 
     public void expand() {
-        if (state == State.shrinked){
+        if (state == State.shrieked){
             state = State.back;
             ValueAnimator animator = ValueAnimator.ofInt(0,255);
             animator.setDuration(200);
@@ -228,7 +226,6 @@ public class FancyButton extends RelativeLayout {
 
             nowRad = circleR;
             final float addRad = Math.abs(circleR-10f)/15f;
-            final int[] i = {0};
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator valueAnimator) {
@@ -260,7 +257,7 @@ public class FancyButton extends RelativeLayout {
 
     public void collapse() {
         if (state == State.normal){
-            state= State.srink;
+            state= State.shrink;
             nowPadW = initPadd;
             nowPadH = initPadd;
             nowRad = initPadd;
@@ -294,7 +291,7 @@ public class FancyButton extends RelativeLayout {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-                    state= State.shrinked;
+                    state= State.shrieked;
                     if (listener!=null)
                         listener.animationEnded();
                     isExpanded = false;
@@ -304,5 +301,5 @@ public class FancyButton extends RelativeLayout {
         }
     }
 
-    enum State{normal,srink,back,shrinked}
+    private enum State{normal, shrink,back, shrieked}
 }
