@@ -13,5 +13,6 @@
         <attr name="progressColor" format="color"/>
         <attr name="hideFillAfterCollapse" format="boolean"/>
         <attr name="strokeWidth" format="integer"/>
+        <attr name="capsText" format="boolean"/>
     </declare-styleable>
 </resources>

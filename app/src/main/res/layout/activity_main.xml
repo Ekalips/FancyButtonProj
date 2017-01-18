@@ -13,12 +13,12 @@
         android:layout_height="60dp"
         android:id="@+id/btn1"
         fnBtn:text="Button"
-        fnBtn:textColor="#000"
+        fnBtn:capsText="true"
+        fnBtn:textColor="#fff"
         fnBtn:btnStyle="stroke_fill"
-        android:transitionName="first"
         fnBtn:fillColor="@android:color/holo_green_light"
         fnBtn:strokeColor="@android:color/holo_red_light"
-        fnBtn:progressColor="@android:color/holo_blue_dark"
+        fnBtn:progressColor="#000"
         fnBtn:hideFillAfterCollapse="false"/>
 
     <com.ekalips.fancybuttonproj.FancyButton
@@ -27,10 +27,10 @@
         android:layout_marginTop="60dp"
         android:id="@+id/btn2"
         fnBtn:text="Button"
-        android:transitionName="second"
         fnBtn:textColor="#000"
-        fnBtn:btnStyle="stroke_fill"
-        fnBtn:fillColor="@android:color/holo_green_light"
+        fnBtn:capsText="true"
+        fnBtn:btnStyle="fill"
+        app:fillColor="#148925"
         fnBtn:progressColor="@android:color/holo_blue_dark"
         fnBtn:hideFillAfterCollapse="true"/>
 
@@ -41,8 +41,8 @@
         android:layout_marginTop="60dp"
         android:id="@+id/btn3"
         fnBtn:text="Button"
-        android:transitionName="second"
         fnBtn:textColor="#000"
+        fnBtn:capsText="true"
         fnBtn:btnStyle="stroke"
         fnBtn:fillColor="@android:color/holo_green_light"
         fnBtn:strokeColor="@android:color/holo_green_light"

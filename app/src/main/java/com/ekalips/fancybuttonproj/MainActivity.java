@@ -1,8 +1,7 @@
 package com.ekalips.fancybuttonproj;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "onClick: " + view);
                 if (view instanceof  FancyButton)
                 {
                     if (((FancyButton)view).isExpanded())

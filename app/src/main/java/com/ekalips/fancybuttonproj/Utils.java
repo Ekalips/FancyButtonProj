@@ -1,7 +1,9 @@
 package com.ekalips.fancybuttonproj;
 
+import android.content.res.Resources;
 import android.graphics.Path;
 import android.graphics.RectF;
+import android.util.TypedValue;
 
 /**
  * Created by wldev on 1/18/17.
@@ -46,5 +48,14 @@ public class Utils {
         path.close();
 
         return path;
+    }
+
+
+    public static float px2dp(Resources resource, float px)  {
+        return (float) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, px,resource.getDisplayMetrics());
+    }
+
+    public static int dp2px(Resources resource, int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,   dp,resource.getDisplayMetrics());
     }
 }
