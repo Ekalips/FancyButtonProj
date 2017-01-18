@@ -8,7 +8,7 @@ Juste a funcy button with progress bar
 
  1) ```fnBtn:btnStyle with values "stroke" , "fill", "stroke_fill".  [default - stroke]```
  
-       Use this for defining style of your button
+Use this for defining style of your button
         
  2) ```fnBtn:text  [default - ""]```
  
@@ -16,27 +16,27 @@ Juste a funcy button with progress bar
  
  4) ```fnBtn:fillColor [default - transperent]```
  
-       Use this for changing fill color of button (for "fill" and "stroke_fill" styles)
+Use this for changing fill color of button (for "fill" and "stroke_fill" styles)
         
  5) ```fnBtn:strokeColor [default - black]```
  
-       Use this for changing stroke color of button (for "fill" and "stroke_fill" styles)
+Use this for changing stroke color of button (for "fill" and "stroke_fill" styles)
         
  6) ```fnBtn:progressColor [default - black]```
  
-       Use this for changing color of progress bar (for "fill" and "stroke_fill" styles)
+Use this for changing color of progress bar (for "fill" and "stroke_fill" styles)
        
  7) ```fnBtn:hideFillAfterCollapse [default - false]```
  
-       Use this for determing if button will stay on screen after collapsing (for "fill" and "stroke_fill", looks like                 little circle inside of progress bar)
+Use this for determing if button will stay on screen after collapsing (for "fill" and "stroke_fill", looks like                 little circle inside of progress bar)
         
  8) ```fnBtn:strokeWidth [default - 4]```
  
-       Determins stroke width (for "stroke" and "stroke_fill")
+Determins stroke width (for "stroke" and "stroke_fill")
         
  9) ```fnBtn:capsText [default - true]```
  
-       If true will make all text uppercase
+If true will make all text uppercase
         
         
 
