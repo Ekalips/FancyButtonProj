@@ -90,7 +90,7 @@ If true will make all text uppercase
 
         repositories {
             maven {
-                url  "http://ekalips-dev.bintray.com/FancyProgressButtonbyEkalips" 
+                url  "http://dl.bintray.com/ekalips/FancyProgressButton" 
             }
         }
 
