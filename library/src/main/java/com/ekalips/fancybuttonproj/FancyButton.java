@@ -13,7 +13,9 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,7 +23,7 @@ import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 
-public class FancyButton extends RelativeLayout {
+public class FancyButton extends FrameLayout {
 
     interface AnimationEndListener{
         void animationEnded();
@@ -117,8 +119,8 @@ public class FancyButton extends RelativeLayout {
         this.addView(view);
 
         bar = new MaterialProgressBar(context);
-        RelativeLayout.LayoutParams barParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        barParams.addRule(CENTER_IN_PARENT,TRUE);
+        FrameLayout.LayoutParams barParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        barParams.gravity = Gravity.CENTER;
         bar.setLayoutParams(barParams);
         bar.setIndeterminate(true);
 
