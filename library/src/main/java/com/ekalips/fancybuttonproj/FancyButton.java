@@ -221,6 +221,8 @@ public class FancyButton extends FrameLayout {
 
     public void expand() {
 //        if (state == State.shrieked){
+        if (state == State.normal)
+            return;
         if (animator!=null)
         {
             animator.removeAllUpdateListeners();
@@ -266,6 +268,8 @@ public class FancyButton extends FrameLayout {
 
     public void collapse() {
 //        if (state == State.normal){
+        if (state == State.shrieked)
+            return;
         if (animator!=null)
         {
             animator.removeAllUpdateListeners();
