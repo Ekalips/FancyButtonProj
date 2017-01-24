@@ -217,10 +217,17 @@ public class FancyButton extends FrameLayout {
     private State state = FancyButton.State.normal;
 
 
+    ValueAnimator animator;
+
     public void expand() {
-        if (state == State.shrieked){
+//        if (state == State.shrieked){
+        if (animator!=null)
+        {
+            animator.removeAllUpdateListeners();
+            animator.cancel();
+        }
             state = State.back;
-            ValueAnimator animator = ValueAnimator.ofInt(0,255);
+            animator = ValueAnimator.ofInt(0,255);
             animator.setDuration(200);
 
             final float addWVal = (float) Math.abs(0-nowPadW + initPadd)/15f;
@@ -254,16 +261,21 @@ public class FancyButton extends FrameLayout {
                 }
             });
             animator.start();
-        }
+//        }
     }
 
     public void collapse() {
-        if (state == State.normal){
+//        if (state == State.normal){
+        if (animator!=null)
+        {
+            animator.removeAllUpdateListeners();
+            animator.cancel();
+        }
             state= State.shrink;
             nowPadW = initPadd;
             nowPadH = initPadd;
             nowRad = initPadd;
-            ValueAnimator animator = ValueAnimator.ofInt(255,0);
+            animator = ValueAnimator.ofInt(255,0);
             animator.setDuration(200);
 
             final float addWVal = Math.abs(initPadd - destLeft)/15f;
@@ -272,6 +284,7 @@ public class FancyButton extends FrameLayout {
             final int[] i = {0};
 
 
+        isExpanded = false;
 
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
@@ -296,11 +309,10 @@ public class FancyButton extends FrameLayout {
                     state= State.shrieked;
                     if (listener!=null)
                         listener.animationEnded();
-                    isExpanded = false;
                 }
             });
             animator.start();
-        }
+//        }
     }
 
     private enum State{normal, shrink,back, shrieked}
