@@ -210,6 +210,8 @@ public class FancyButton extends FrameLayout {
     }
 
 
+
+
     private double nowPadW = initPadd;
     private double nowPadH = initPadd;
     private double nowRad = initPadd;
