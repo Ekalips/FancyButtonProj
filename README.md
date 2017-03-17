@@ -83,16 +83,16 @@ If true will make all text uppercase
         <dependency>
           <groupId>com.ekalips.android</groupId>
           <artifactId>fancyprogressbutton</artifactId>
-          <version>1.0.9</version>
+          <version>1.1.1</version>
           <type>pom</type>
         </dependency>
         
 ##      Gradle
 
-        compile 'com.ekalips.android:fancyprogressbutton:1.0.9'
+        compile 'com.ekalips.android:fancyprogressbutton:1.1.1'
 ##      Ivy
 
-        <dependency org='com.ekalips.android' name='fancyprogressbutton' rev='1.0.9'>
+        <dependency org='com.ekalips.android' name='fancyprogressbutton' rev='1.1.1'>
         <artifact name='fancyprogressbutton' ext='pom' />
         </dependency>
         
