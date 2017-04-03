@@ -240,7 +240,8 @@ public class FancyButton extends FrameLayout {
                 nowPadW -= addWVal;
                 nowRad -= addRad;
                 if (hideAfterCollapse) {
-                    strokePaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
+                    if (strokePaint.getColor() != Color.TRANSPARENT)
+                        strokePaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
                     if (fillPaint.getColor() != Color.TRANSPARENT)
                         fillPaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
                 }
@@ -279,8 +280,6 @@ public class FancyButton extends FrameLayout {
         final float addWVal = Math.abs(initPadd - destLeft) / 15f;
         final float addHVal = Math.abs(initPadd - destTop) / 15f;
         final float addRad = circleR / 15f;
-        final int[] i = {0};
-
 
         isExpanded = false;
 
@@ -298,7 +297,6 @@ public class FancyButton extends FrameLayout {
                         fillPaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
                 }
                 view.setAlpha((int) valueAnimator.getAnimatedValue() / 255f);
-                i[0]++;
             }
         });
         animator.addListener(new AnimatorListenerAdapter() {
@@ -314,7 +312,7 @@ public class FancyButton extends FrameLayout {
 //        }
     }
 
-    public void setText(String text){
+    public void setText(String text) {
         view.setText(text);
     }
 
