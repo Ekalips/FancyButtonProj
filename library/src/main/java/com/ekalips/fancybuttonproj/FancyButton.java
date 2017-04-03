@@ -25,31 +25,30 @@ import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
 public class FancyButton extends FrameLayout {
 
-    interface AnimationEndListener{
+    interface AnimationEndListener {
         void animationEnded();
     }
 
     private static final String TAG = FancyButton.class.getSimpleName();
 
 
-
     public FancyButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init(context,attrs);
+        init(context, attrs);
     }
 
     public FancyButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context,attrs);
+        init(context, attrs);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public FancyButton(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        init(context,attrs);
+        init(context, attrs);
     }
 
-    private Paint strokePaint,fillPaint;
+    private Paint strokePaint, fillPaint;
     private MaterialProgressBar bar;
     private TextView view;
 
@@ -88,25 +87,25 @@ public class FancyButton extends FrameLayout {
     private int trueSixtee = 60;
 
 
-    public void init(Context context, AttributeSet attrs){
+    public void init(Context context, AttributeSet attrs) {
 
         this.setClickable(true);
         this.setWillNotDraw(false);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.FancyButton);
         String text = ta.getString(R.styleable.FancyButton_text);
-        int strokeColor = ta.getColor(R.styleable.FancyButton_strokeColor,Color.BLACK);
+        int strokeColor = ta.getColor(R.styleable.FancyButton_strokeColor, Color.BLACK);
         int fillColor = ta.getColor(R.styleable.FancyButton_fillColor, Color.TRANSPARENT);
         int textColor = ta.getColor(R.styleable.FancyButton_textColor, Color.BLACK);
         int progressColor = ta.getColor(R.styleable.FancyButton_progressColor, Color.BLACK);
         int strokeWidth = ta.getInt(R.styleable.FancyButton_strokeWidth, 4);
-        boolean capsText = ta.getBoolean(R.styleable.FancyButton_capsText,true);
-        if (capsText && text!=null)
+        boolean capsText = ta.getBoolean(R.styleable.FancyButton_capsText, true);
+        if (capsText && text != null)
             text = text.toUpperCase();
         String temp = ta.getString(R.styleable.FancyButton_btnStyle);
-        if (temp!=null)
+        if (temp != null)
             style = Integer.parseInt(temp);
-        hideAfterCollapse = ta.getBoolean(R.styleable.FancyButton_hideFillAfterCollapse,true);
+        hideAfterCollapse = ta.getBoolean(R.styleable.FancyButton_hideFillAfterCollapse, true);
         ta.recycle();
 
         view = new TextView(context, attrs, android.R.attr.borderlessButtonStyle);
@@ -142,8 +141,8 @@ public class FancyButton extends FrameLayout {
         fillPaint.setColor(fillColor);
         fillPaint.setStyle(Paint.Style.FILL);
 
-        initPadd = Utils.dp2px(context.getResources(),5);
-        trueSixtee = Utils.dp2px(context.getResources(),20);
+        initPadd = Utils.dp2px(context.getResources(), 5);
+        trueSixtee = Utils.dp2px(context.getResources(), 20);
 
 
     }
@@ -155,51 +154,48 @@ public class FancyButton extends FrameLayout {
 
         if (state == State.normal) {
             if (style == 0)
-                canvas.drawPath(Utils.composeRoundedRectPath(initPadd, initPadd, canvas.getWidth() - initPadd, canvas.getHeight() - initPadd,initPadd), strokePaint);
+                canvas.drawPath(Utils.composeRoundedRectPath(initPadd, initPadd, canvas.getWidth() - initPadd, canvas.getHeight() - initPadd, initPadd), strokePaint);
             else if (style == 1)
-                canvas.drawPath(Utils.composeRoundedRectPath(initPadd, initPadd, canvas.getWidth() - initPadd, canvas.getHeight() - initPadd,initPadd), fillPaint);
-            else if (style == 2){
-                canvas.drawPath(Utils.composeRoundedRectPath(initPadd, initPadd, canvas.getWidth() - initPadd, canvas.getHeight() - initPadd,initPadd), fillPaint);
-                canvas.drawPath(Utils.composeRoundedRectPath(initPadd, initPadd, canvas.getWidth() - initPadd, canvas.getHeight() - initPadd,initPadd), strokePaint);
+                canvas.drawPath(Utils.composeRoundedRectPath(initPadd, initPadd, canvas.getWidth() - initPadd, canvas.getHeight() - initPadd, initPadd), fillPaint);
+            else if (style == 2) {
+                canvas.drawPath(Utils.composeRoundedRectPath(initPadd, initPadd, canvas.getWidth() - initPadd, canvas.getHeight() - initPadd, initPadd), fillPaint);
+                canvas.drawPath(Utils.composeRoundedRectPath(initPadd, initPadd, canvas.getWidth() - initPadd, canvas.getHeight() - initPadd, initPadd), strokePaint);
             }
-            destLeft = (this.getRight()-this.getLeft())/2 - trueSixtee;
-            destRight = (this.getRight()-this.getLeft())/2 + trueSixtee;
-            destTop = (this.getBottom()-this.getTop())/2 - trueSixtee;
-            destBot = (this.getBottom()-this.getTop())/2 + trueSixtee;
-            circleR = Math.abs(destLeft-destRight);
-            ObjectAnimator animator = ObjectAnimator.ofFloat(bar,"alpha",1,0);
+            destLeft = (this.getRight() - this.getLeft()) / 2 - trueSixtee;
+            destRight = (this.getRight() - this.getLeft()) / 2 + trueSixtee;
+            destTop = (this.getBottom() - this.getTop()) / 2 - trueSixtee;
+            destBot = (this.getBottom() - this.getTop()) / 2 + trueSixtee;
+            circleR = Math.abs(destLeft - destRight);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(bar, "alpha", 1, 0);
             animator.addListener(hideProgressBarListener);
             animator.setDuration(0);
             animator.start();
-        }
-        else if (state == State.shrieked){
-            if (!hideAfterCollapse){
+        } else if (state == State.shrieked) {
+            if (!hideAfterCollapse) {
                 if (style == 1 || style == 2)
-                    canvas.drawCircle(destRight-((destRight-destLeft)/2), destBot-((destBot-destTop)/2), circleR/2, fillPaint);
+                    canvas.drawCircle(destRight - ((destRight - destLeft) / 2), destBot - ((destBot - destTop) / 2), circleR / 2, fillPaint);
 
             }
-            ObjectAnimator animator = ObjectAnimator.ofFloat(bar,"alpha",0,1);
+            ObjectAnimator animator = ObjectAnimator.ofFloat(bar, "alpha", 0, 1);
             animator.setDuration(0);
             animator.start();
             bar.setVisibility(VISIBLE);
-        }
-        else {
+        } else {
             if (state == State.shrink)
                 if (style == 0)
-                    canvas.drawPath(Utils.composeRoundedRectPath((float)(0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), strokePaint);
+                    canvas.drawPath(Utils.composeRoundedRectPath((float) (0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), strokePaint);
                 else if (style == 1)
-                    canvas.drawPath(Utils.composeRoundedRectPath((float)(0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), fillPaint);
-                else if (style == 2)
-                {
-                    canvas.drawPath(Utils.composeRoundedRectPath((float)(0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), fillPaint);
-                    canvas.drawPath(Utils.composeRoundedRectPath((float)(0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), strokePaint);
+                    canvas.drawPath(Utils.composeRoundedRectPath((float) (0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), fillPaint);
+                else if (style == 2) {
+                    canvas.drawPath(Utils.composeRoundedRectPath((float) (0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), fillPaint);
+                    canvas.drawPath(Utils.composeRoundedRectPath((float) (0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), strokePaint);
                 }
             if (state == State.back) {
                 if (style == 0)
                     canvas.drawPath(Utils.composeRoundedRectPath((float) (0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), strokePaint);
                 else if (style == 1)
                     canvas.drawPath(Utils.composeRoundedRectPath((float) (0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), fillPaint);
-                else if (style == 2){
+                else if (style == 2) {
                     canvas.drawPath(Utils.composeRoundedRectPath((float) (0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), fillPaint);
                     canvas.drawPath(Utils.composeRoundedRectPath((float) (0 + nowPadW), (float) (0 + nowPadH), (float) (canvas.getWidth() - nowPadW), (float) (canvas.getHeight() - nowPadH), (float) nowRad), strokePaint);
                 }
@@ -210,12 +206,10 @@ public class FancyButton extends FrameLayout {
     }
 
 
-
-
     private double nowPadW = initPadd;
     private double nowPadH = initPadd;
     private double nowRad = initPadd;
-    private float destLeft,destTop,destRight,destBot, circleR;
+    private float destLeft, destTop, destRight, destBot, circleR;
     private State state = FancyButton.State.normal;
 
 
@@ -225,46 +219,45 @@ public class FancyButton extends FrameLayout {
 //        if (state == State.shrieked){
         if (state == State.normal)
             return;
-        if (animator!=null)
-        {
+        if (animator != null) {
             animator.removeAllUpdateListeners();
             animator.cancel();
         }
-            state = State.back;
-            animator = ValueAnimator.ofInt(0,255);
-            animator.setDuration(200);
+        state = State.back;
+        animator = ValueAnimator.ofInt(0, 255);
+        animator.setDuration(200);
 
-            final float addWVal = (float) Math.abs(0-nowPadW + initPadd)/15f;
-            final float addHVal = (float) Math.abs(0-nowPadH + initPadd)/15f;
+        final float addWVal = (float) Math.abs(0 - nowPadW + initPadd) / 15f;
+        final float addHVal = (float) Math.abs(0 - nowPadH + initPadd) / 15f;
 
-            nowRad = circleR;
-            final float addRad = Math.abs(circleR-10f)/15f;
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    FancyButton.this.invalidate();
-                    nowPadH-=addHVal;
-                    nowPadW-=addWVal;
-                    nowRad-=addRad;
-                    if (hideAfterCollapse) {
-                        strokePaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
-                        if (fillPaint.getColor()!=Color.TRANSPARENT)
-                            fillPaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
-                    }
-                    view.setAlpha((int)valueAnimator.getAnimatedValue()/255f);
+        nowRad = circleR;
+        final float addRad = Math.abs(circleR - 10f) / 15f;
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                FancyButton.this.invalidate();
+                nowPadH -= addHVal;
+                nowPadW -= addWVal;
+                nowRad -= addRad;
+                if (hideAfterCollapse) {
+                    strokePaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
+                    if (fillPaint.getColor() != Color.TRANSPARENT)
+                        fillPaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
                 }
-            });
-            animator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    state= State.normal;
-                    if (listener!=null)
-                        listener.animationEnded();
-                    isExpanded = true;
-                }
-            });
-            animator.start();
+                view.setAlpha((int) valueAnimator.getAnimatedValue() / 255f);
+            }
+        });
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                state = State.normal;
+                if (listener != null)
+                    listener.animationEnded();
+                isExpanded = true;
+            }
+        });
+        animator.start();
 //        }
     }
 
@@ -272,54 +265,58 @@ public class FancyButton extends FrameLayout {
 //        if (state == State.normal){
         if (state == State.shrieked)
             return;
-        if (animator!=null)
-        {
+        if (animator != null) {
             animator.removeAllUpdateListeners();
             animator.cancel();
         }
-            state= State.shrink;
-            nowPadW = initPadd;
-            nowPadH = initPadd;
-            nowRad = initPadd;
-            animator = ValueAnimator.ofInt(255,0);
-            animator.setDuration(200);
+        state = State.shrink;
+        nowPadW = initPadd;
+        nowPadH = initPadd;
+        nowRad = initPadd;
+        animator = ValueAnimator.ofInt(255, 0);
+        animator.setDuration(200);
 
-            final float addWVal = Math.abs(initPadd - destLeft)/15f;
-            final float addHVal = Math.abs(initPadd - destTop )/15f;
-            final float addRad = circleR/15f;
-            final int[] i = {0};
+        final float addWVal = Math.abs(initPadd - destLeft) / 15f;
+        final float addHVal = Math.abs(initPadd - destTop) / 15f;
+        final float addRad = circleR / 15f;
+        final int[] i = {0};
 
 
         isExpanded = false;
 
-            animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                @Override
-                public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                    FancyButton.this.invalidate();
-                    nowPadH+=addHVal;
-                    nowPadW+=addWVal;
-                    nowRad+=addRad;
-                    if (hideAfterCollapse) {
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                FancyButton.this.invalidate();
+                nowPadH += addHVal;
+                nowPadW += addWVal;
+                nowRad += addRad;
+                if (hideAfterCollapse) {
+                    if (strokePaint.getColor() != Color.TRANSPARENT)
                         strokePaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
-                        if (fillPaint.getColor()!=Color.TRANSPARENT)
-                            fillPaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
-                    }
-                    view.setAlpha((int)valueAnimator.getAnimatedValue()/255f);
-                    i[0]++;
+                    if (fillPaint.getColor() != Color.TRANSPARENT)
+                        fillPaint.setAlpha((Integer) valueAnimator.getAnimatedValue());
                 }
-            });
-            animator.addListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    super.onAnimationEnd(animation);
-                    state= State.shrieked;
-                    if (listener!=null)
-                        listener.animationEnded();
-                }
-            });
-            animator.start();
+                view.setAlpha((int) valueAnimator.getAnimatedValue() / 255f);
+                i[0]++;
+            }
+        });
+        animator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                super.onAnimationEnd(animation);
+                state = State.shrieked;
+                if (listener != null)
+                    listener.animationEnded();
+            }
+        });
+        animator.start();
 //        }
     }
 
-    private enum State{normal, shrink,back, shrieked}
+    public void setText(String text){
+        view.setText(text);
+    }
+
+    private enum State {normal, shrink, back, shrieked}
 }
