@@ -13,6 +13,8 @@ import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -100,6 +102,8 @@ public class FancyButton extends FrameLayout {
         int progressColor = ta.getColor(R.styleable.FancyButton_progressColor, Color.BLACK);
         int strokeWidth = ta.getInt(R.styleable.FancyButton_strokeWidth, 4);
         boolean capsText = ta.getBoolean(R.styleable.FancyButton_capsText, true);
+        float textSize = ta.getDimensionPixelSize(R.styleable.FancyButton_textSize,18);
+        Log.d(TAG, "init: " + textSize);
         if (capsText && text != null)
             text = text.toUpperCase();
         String temp = ta.getString(R.styleable.FancyButton_btnStyle);
@@ -112,6 +116,7 @@ public class FancyButton extends FrameLayout {
         view.setClickable(false);
         view.setFocusable(false);
         view.setTextColor(textColor);
+        view.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
         view.setText(text);

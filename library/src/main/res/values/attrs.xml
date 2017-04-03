@@ -14,5 +14,6 @@
         <attr name="hideFillAfterCollapse" format="boolean"/>
         <attr name="strokeWidth" format="integer"/>
         <attr name="capsText" format="boolean"/>
+        <attr name="textSize" format="dimension"/>
     </declare-styleable>
 </resources>
