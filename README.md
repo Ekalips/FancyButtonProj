@@ -1,4 +1,4 @@
- [ ![Download](https://api.bintray.com/packages/ekalips/FancyProgressButton/FancyProgressButton/images/download.svg?version=1.2.0) ](https://bintray.com/ekalips/FancyProgressButton/FancyProgressButton/1.2.0/link)
+[ ![Download](https://api.bintray.com/packages/ekalips/FancyProgressButton/FancyProgressButton/images/download.svg) ](https://bintray.com/ekalips/FancyProgressButton/FancyProgressButton/_latestVersion)
 
 
 # FancyButtonProj
