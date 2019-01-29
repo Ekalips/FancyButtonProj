@@ -10,35 +10,35 @@ Juste a funcy button with progress bar
 
 #   List of attributes:
 
- 1) ```fnBtn:btnStyle with values "stroke" , "fill", "stroke_fill".  [default - stroke]```
+ 1) ```app:f_btnStyle with values "stroke" , "fill", "stroke_fill".  [default - stroke]```
  
 Use this for defining style of your button
         
- 2) ```fnBtn:text  [default - ""]```
+ 2) ```app:f_text  [default - ""]```
  
- 3) ```fnBtn:textColor [default - black]```
+ 3) ```app:f_textColor [default - black]```
  
- 4) ```fnBtn:fillColor [default - transperent]```
+ 4) ```app:f_fillColor [default - transperent]```
  
 Use this for changing fill color of button (for "fill" and "stroke_fill" styles)
         
- 5) ```fnBtn:strokeColor [default - black]```
+ 5) ```app:f_strokeColor [default - black]```
  
 Use this for changing stroke color of button (for "fill" and "stroke_fill" styles)
         
- 6) ```fnBtn:progressColor [default - black]```
+ 6) ```app:f_progressColor [default - black]```
  
 Use this for changing color of progress bar (for "fill" and "stroke_fill" styles)
        
- 7) ```fnBtn:hideFillAfterCollapse [default - false]```
+ 7) ```app:f_hideFillAfterCollapse [default - false]```
  
 Use this for determing if button will stay on screen after collapsing (for "fill" and "stroke_fill", looks like                 little circle inside of progress bar)
         
- 8) ```fnBtn:strokeWidth [default - 4]```
+ 8) ```app:f_strokeWidth [default - 4]```
  
 Determins stroke width (for "stroke" and "stroke_fill")
         
- 9) ```fnBtn:capsText [default - true]```
+ 9) ```app:f_capsText [default - true]```
  
 If true will make all text uppercase
         
@@ -46,19 +46,20 @@ If true will make all text uppercase
 
 #   Example of usage:
 
-    xmlns:fnBtn="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     <com.ekalips.fancybuttonproj.FancyButton
+        android:id="@+id/btn1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn1"
-        fnBtn:btnStyle="stroke_fill"
-        fnBtn:hideFillAfterCollapse="false"
-        fnBtn:fillColor="@android:color/holo_blue_bright"
-        fnBtn:progressColor="@android:color/holo_green_light"
-        fnBtn:strokeColor="@android:color/holo_red_light"
-        fnBtn:textColor="#000"
-        fnBtn:text="Button"/>
+        app:f_btnStyle="stroke_fill"
+        app:f_fillColor="@android:color/holo_blue_bright"
+        app:f_hideFillAfterCollapse="false"
+        app:f_progressColor="@android:color/holo_green_light"
+        app:f_strokeColor="@android:color/holo_red_light"
+        app:f_text="Button"
+        app:f_textColor="#000"
+        app:f_textSize="22sp" />
         
         
         FancyButton button1 = (FancyButton) findViewById(R.id.btn1);
@@ -87,16 +88,17 @@ If true will make all text uppercase
         <dependency>
           <groupId>com.ekalips.android</groupId>
           <artifactId>fancyprogressbutton</artifactId>
-          <version>1.1.3</version>
+          <version>1.2.1</version>
           <type>pom</type>
         </dependency>
         
 ##      Gradle
 
-        compile 'com.ekalips.android:fancyprogressbutton:1.1.3'
+        implementation 'com.ekalips.android:fancyprogressbutton:1.2.1'
+        
 ##      Ivy
 
-        <dependency org='com.ekalips.android' name='fancyprogressbutton' rev='1.1.3'>
+        <dependency org='com.ekalips.android' name='fancyprogressbutton' rev='1.2.1'>
         <artifact name='fancyprogressbutton' ext='pom' />
         </dependency>
         
