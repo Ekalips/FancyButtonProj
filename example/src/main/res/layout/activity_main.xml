@@ -5,46 +5,47 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:fnBtn="http://schemas.android.com/apk/res-auto"
     tools:context="com.wldev.example.MainActivity">
 
     <com.ekalips.fancybuttonproj.FancyButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/btn1"
-        fnBtn:btnStyle="stroke_fill"
-        fnBtn:hideFillAfterCollapse="false"
-        fnBtn:fillColor="@android:color/holo_blue_bright"
-        fnBtn:progressColor="@android:color/holo_green_light"
-        fnBtn:strokeColor="@android:color/holo_red_light"
-        fnBtn:textSize="22sp"
-        fnBtn:textColor="#000"
-        fnBtn:text="Button"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:f_btnStyle="stroke_fill"
+        app:f_fillColor="@android:color/holo_blue_bright"
+        app:f_hideFillAfterCollapse="false"
+        app:f_progressColor="@android:color/holo_green_light"
+        app:f_strokeColor="@android:color/holo_red_light"
+        app:f_text="Button"
+        app:f_textColor="#000"
+        app:f_textSize="22sp" />
 
 
     <com.ekalips.fancybuttonproj.FancyButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:id="@+id/btn2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        fnBtn:btnStyle="fill"
-        fnBtn:hideFillAfterCollapse="true"
-        fnBtn:fillColor="@android:color/holo_green_light"
-        fnBtn:progressColor="@android:color/holo_green_light"
-        fnBtn:textColor="#fff"
-        fnBtn:text="Button"/>
+        app:f_btnStyle="fill"
+        app:f_fillColor="@android:color/holo_green_light"
+        app:f_hideFillAfterCollapse="true"
+        app:f_progressColor="@android:color/holo_green_light"
+        app:f_text="Button"
+        app:f_textColor="#fff"
+        app:f_textSize="18sp" />
 
 
     <com.ekalips.fancybuttonproj.FancyButton
+        android:id="@+id/btn3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btn3"
         android:layout_marginTop="60dp"
-        fnBtn:btnStyle="stroke"
-        fnBtn:hideFillAfterCollapse="true"
-        fnBtn:strokeColor="@android:color/transparent"
-        fnBtn:progressColor="@android:color/holo_blue_light"
-        fnBtn:textColor="#000"
-        fnBtn:text="Button"/>
+        app:f_btnStyle="stroke"
+        app:f_hideFillAfterCollapse="true"
+        app:f_progressColor="@android:color/holo_blue_light"
+        app:f_strokeColor="@android:color/transparent"
+        app:f_text="Button"
+        app:f_textColor="#000"
+        app:f_textSize="18sp" />
 
 </LinearLayout>

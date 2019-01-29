@@ -21,10 +21,12 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import me.zhanghai.android.materialprogressbar.IndeterminateProgressDrawable;
+import me.zhanghai.android.materialprogressbar.IndeterminateCircularProgressDrawable;
 import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
 
-
+/**
+ * Created by Ekalips on 1/18/17.
+ */
 public class FancyButton extends FrameLayout {
 
     interface AnimationEndListener {
@@ -95,28 +97,32 @@ public class FancyButton extends FrameLayout {
         this.setWillNotDraw(false);
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.FancyButton);
-        String text = ta.getString(R.styleable.FancyButton_text);
-        int strokeColor = ta.getColor(R.styleable.FancyButton_strokeColor, Color.BLACK);
-        int fillColor = ta.getColor(R.styleable.FancyButton_fillColor, Color.TRANSPARENT);
-        int textColor = ta.getColor(R.styleable.FancyButton_textColor, Color.BLACK);
-        int progressColor = ta.getColor(R.styleable.FancyButton_progressColor, Color.BLACK);
-        int strokeWidth = ta.getInt(R.styleable.FancyButton_strokeWidth, 4);
-        boolean capsText = ta.getBoolean(R.styleable.FancyButton_capsText, true);
-        float textSize = ta.getDimensionPixelSize(R.styleable.FancyButton_textSize,18);
-        Log.d(TAG, "init: " + textSize);
+        String text = ta.getString(R.styleable.FancyButton_f_text);
+        int strokeColor = ta.getColor(R.styleable.FancyButton_f_strokeColor, Color.BLACK);
+        int fillColor = ta.getColor(R.styleable.FancyButton_f_fillColor, Color.TRANSPARENT);
+        int textColor = ta.getColor(R.styleable.FancyButton_f_textColor, Color.BLACK);
+        int progressColor = ta.getColor(R.styleable.FancyButton_f_progressColor, Color.BLACK);
+        int strokeWidth = ta.getInt(R.styleable.FancyButton_f_strokeWidth, -1);
+        if (strokeWidth == -1)
+            strokeWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, context.getResources().getDisplayMetrics());
+
+        boolean capsText = ta.getBoolean(R.styleable.FancyButton_f_capsText, true);
+        float textSize = ta.getDimensionPixelSize(R.styleable.FancyButton_f_textSize, -1);
+        if (textSize == -1)
+            textSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 16, context.getResources().getDisplayMetrics());
         if (capsText && text != null)
             text = text.toUpperCase();
-        String temp = ta.getString(R.styleable.FancyButton_btnStyle);
+        String temp = ta.getString(R.styleable.FancyButton_f_btnStyle);
         if (temp != null)
             style = Integer.parseInt(temp);
-        hideAfterCollapse = ta.getBoolean(R.styleable.FancyButton_hideFillAfterCollapse, true);
+        hideAfterCollapse = ta.getBoolean(R.styleable.FancyButton_f_hideFillAfterCollapse, true);
         ta.recycle();
 
         view = new TextView(context, attrs, android.R.attr.borderlessButtonStyle);
         view.setClickable(false);
         view.setFocusable(false);
         view.setTextColor(textColor);
-        view.setTextSize(TypedValue.COMPLEX_UNIT_PX,textSize);
+        view.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         view.setLayoutParams(params);
         view.setText(text);
@@ -129,7 +135,7 @@ public class FancyButton extends FrameLayout {
         bar.setIndeterminate(true);
 
         // fixes pre-Lollipop progressBar indeterminateDrawable tinting
-        IndeterminateProgressDrawable drawable = new IndeterminateProgressDrawable(context);
+        IndeterminateCircularProgressDrawable drawable = new IndeterminateCircularProgressDrawable(context);
         drawable.setTint(progressColor);
         bar.setIndeterminateDrawable(drawable);
 

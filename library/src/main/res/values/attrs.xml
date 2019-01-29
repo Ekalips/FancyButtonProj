@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="FancyButton">
-        <attr name="btnStyle" format="enum">
+        <attr name="f_btnStyle" format="enum">
             <enum name="stroke" value="0"/>
             <enum name="fill" value="1"/>
             <enum name="stroke_fill" value="2"/>
         </attr>
-        <attr name="text" format="string"/>
-        <attr name="textColor" format="color"/>
-        <attr name="fillColor" format="color"/>
-        <attr name="strokeColor" format="color"/>
-        <attr name="progressColor" format="color"/>
-        <attr name="hideFillAfterCollapse" format="boolean"/>
-        <attr name="strokeWidth" format="integer"/>
-        <attr name="capsText" format="boolean"/>
-        <attr name="textSize" format="dimension"/>
+        <attr name="f_text" format="string"/>
+        <attr name="f_textColor" format="color"/>
+        <attr name="f_fillColor" format="color"/>
+        <attr name="f_strokeColor" format="color"/>
+        <attr name="f_progressColor" format="color"/>
+        <attr name="f_hideFillAfterCollapse" format="boolean"/>
+        <attr name="f_strokeWidth" format="integer"/>
+        <attr name="f_capsText" format="boolean"/>
+        <attr name="f_textSize" format="dimension"/>
     </declare-styleable>
 </resources>

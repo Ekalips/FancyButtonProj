@@ -6,7 +6,7 @@ import android.graphics.RectF;
 import android.util.TypedValue;
 
 /**
- * Created by wldev on 1/18/17.
+ * Created by Ekalips on 1/18/17.
  */
 
 public class Utils {
