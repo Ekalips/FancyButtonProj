@@ -5,8 +5,7 @@
 
 Juste a funcy button with progress bar
 
-<img alt="Showcase" src="https://s29.postimg.org/9bfm2dvzr/ezgif_com_crop.gif" />
-
+<img alt="Showcase" src="https://raw.githubusercontent.com/Ekalips/FancyButtonProj/master/showcase/demo.gif" />
 
 #   List of attributes:
 
