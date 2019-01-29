@@ -43,7 +43,7 @@
         app:f_btnStyle="stroke"
         app:f_hideFillAfterCollapse="true"
         app:f_progressColor="@android:color/holo_blue_light"
-        app:f_strokeColor="@android:color/transparent"
+        app:f_strokeColor="@android:color/holo_blue_light"
         app:f_text="Button"
         app:f_textColor="#000"
         app:f_textSize="18sp" />
