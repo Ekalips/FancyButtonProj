@@ -15,5 +15,10 @@
         <attr name="f_strokeWidth" format="integer"/>
         <attr name="f_capsText" format="boolean"/>
         <attr name="f_textSize" format="dimension"/>
+        //Adding new Attribute Background
+        <attr name="f_background" format="reference"/>
+        <attr name="f_textFont" format="string"/>
+        <attr name="f_textAppearance" format="string"/>
+
     </declare-styleable>
 </resources>
